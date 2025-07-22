@@ -4,6 +4,7 @@
 // Khai báo dưới dạng HẰNG SỐ để không phải dùng $GLOBALS
 
 define('BASE_URL'       , 'http://localhost/jackson/');
+define('BASE_URL_ADMIN'       , 'http://localhost/jackson/admin/');
 
 define('DB_HOST'    , 'localhost');
 define('DB_PORT'    , 3306);
