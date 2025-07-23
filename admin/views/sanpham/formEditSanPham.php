@@ -23,6 +23,8 @@ $now = date('Y-m-d');
             <!-- /.card-header -->
             <!-- form start -->
             <form action="<?= BASE_URL_ADMIN . '?act=sua-san-pham' ?>" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?= $sanPham['id'] ?>">
+                <input type="hidden" name="old_hinh_anh" value="<?= $sanPham['hinh_anh'] ?>">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="ten_san_pham">Tên sản phẩm</label>
@@ -55,7 +57,8 @@ $now = date('Y-m-d');
                     </div>
                     <div class="form-group">
                         <label for="gia_san_pham">Giá sản phẩm</label>
-                        <input type="number" value="<?= number_format($sanPham['gia_san_pham']) ?>" class="form-control" name="gia_san_pham" placeholder="Nhập giá sản phẩm">
+                        <input type="number" value="<?= $sanPham['gia_san_pham'] ?>"
+ class="form-control" name="gia_san_pham" placeholder="Nhập giá sản phẩm">
                         <?php if (isset($errors['gia_san_pham'])) { ?>
                             <p class="text-danger"><?= $errors['gia_san_pham'] ?></p>
                         <?php } ?>
@@ -63,7 +66,8 @@ $now = date('Y-m-d');
 
                     <div class="form-group">
                         <label for="gia_khuyen_mai">Giá khuyến mãi</label>
-                        <input type="number" value="<?= number_format($sanPham['gia_khuyen_mai']) ?>" class="form-control" name="gia_khuyen_mai" placeholder="Nhập giá khuyến mãi (nếu có)">
+                        <input type="number" value="<?= $sanPham['gia_khuyen_mai'] ?>"
+ class="form-control" name="gia_khuyen_mai" placeholder="Nhập giá khuyến mãi (nếu có)">
                     </div>
                     <div class="form-group">
                         <label for="so_luong">Số lượng</label>

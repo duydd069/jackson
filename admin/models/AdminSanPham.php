@@ -65,4 +65,49 @@ class AdminSanPham {
             echo "Lỗi: " . $e->getMessage();
         }
     }
+
+    public function updateSanPham($id, $ten_san_pham, $gia_san_pham, $gia_khuyen_mai, $so_luong, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh) {
+        try {
+            $sql = "UPDATE san_phams SET 
+                        ten_san_pham = :ten_san_pham,
+                        gia_san_pham = :gia_san_pham,
+                        gia_khuyen_mai = :gia_khuyen_mai,
+                        so_luong = :so_luong,
+                        ngay_nhap = :ngay_nhap,
+                        danh_muc_id = :danh_muc_id,
+                        trang_thai = :trang_thai,
+                        mo_ta = :mo_ta,
+                        hinh_anh = :hinh_anh
+                    WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id,
+                ':ten_san_pham' => $ten_san_pham,
+                ':gia_san_pham' => $gia_san_pham,
+                ':gia_khuyen_mai' => $gia_khuyen_mai,
+                ':so_luong' => $so_luong,
+                ':ngay_nhap' => $ngay_nhap,
+                ':danh_muc_id' => $danh_muc_id,
+                ':trang_thai' => $trang_thai,
+                ':mo_ta' => $mo_ta,
+                ':hinh_anh' => $hinh_anh
+            ]);
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+
+    ///Xóa sản phẩm
+    public function deleteSanPham($id) {
+        try {
+            $sql = "DELETE FROM san_phams WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return false;
+        }
+    }
 }
