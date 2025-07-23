@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="<?php echo BASE_URL_ADMIN . '?act=danh-muc'; ?> " class="brand-link">
       <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">ADMIN</span>
     </a>
@@ -61,34 +61,31 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href=" <?php BASE_URL_ADMIN . ' ?act=danh-muc' ?> " class="nav-link">
+            <a href="<?php echo BASE_URL_ADMIN . '?act=danh-muc'; ?> " class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Danh mục
-
               </p>
             </a>
           </li>
                     <li class="nav-item">
-            <a href=" <?php BASE_URL_ADMIN . ' ?act=san-pham' ?> " class="nav-link">
+            <a href="<?php echo BASE_URL_ADMIN . '?act=san-pham'; ?> " class="nav-link">
               <i class="nav-icon fas fa-mobile"></i>
               <p>
                 Sản phẩm
-
               </p>
             </a>
           </li>
                     <li class="nav-item">
-            <a href=" <?php BASE_URL_ADMIN . ' ?act=nguoi-dung' ?> " class="nav-link">
+            <a href="<?php echo BASE_URL_ADMIN . '?act=nguoi-dung'; ?> " class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Người dùng
-
               </p>
             </a>
           </li>
                     <li class="nav-item">
-            <a href=" <?php BASE_URL_ADMIN . ' ?act=binh-luan' ?> " class="nav-link">
+            <a href="<?php echo BASE_URL_ADMIN . '?act=binh-luan'; ?> " class="nav-link">
               <i class="nav-icon fas fa-comment"></i>
               <p>
                 Bình luận
