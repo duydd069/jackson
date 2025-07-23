@@ -19,9 +19,6 @@ include_once './views/layout/sidebar.php';
   <section class="content">
 
     <div class="container-fluid">
-      <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'?>"> 
-        <button class="btn btn-secondary">Chi tiết sản phẩm</button>
-      </a>
       <hr>
       <div class="row">
         <div class="col-12">
@@ -29,36 +26,55 @@ include_once './views/layout/sidebar.php';
             <div class="card-header">
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>STT</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá sản phẩm</th>
-                    <th>Giá khuyến mãi</th>
-                    <th>Số lượng</th>
-                    <th>Danh mục</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($listSanPham as $key => $sanPham): ?>
-                    <tr>
-                      <td><?php echo $sanPham['id'] ?></td>
-                      <td><a href="<?php echo BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id=' . $sanPham['id'] ?>"><?php echo $sanPham['ten_san_pham'] ?></a></td>
-                      <td><?php echo $sanPham['gia_san_pham'] ?></td>
-                      <td><?php echo $sanPham['gia_khuyen_mai'] ?></td>
-                      <td><?php echo $sanPham['so_luong'] ?></td>
-                      <td><?php echo $sanPham['danh_muc_id'] ?></td>
-                      <td>
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id=' . $danhMuc['id'] ?>"><button class="btn btn-primary">Sửa</button></a>
-                        <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id=' . $danhMuc['id'] ?>"><button onclick=" return confirm('Bồ có chắc muốn xóa danh mục này không ?')" class="btn btn-danger">Xóa</button></a>
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
+<div class="card-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>ID</th>
+            <td><?= $sanPham['id'] ?></td>
+          </tr>
+          <tr>
+            <th>Tên sản phẩm</th>
+            <td><?= $sanPham['ten_san_pham'] ?></td>
+          </tr>
+          <tr>
+            <th>Giá sản phẩm</th>
+            <td><?= number_format($sanPham['gia_san_pham']) ?> đ</td>
+          </tr>
+          <tr>
+            <th>Giá khuyến mãi</th>
+            <td><?= number_format($sanPham['gia_khuyen_mai']) ?> đ</td>
+          </tr>
+          <tr>
+            <th>Số lượng</th>
+            <td><?= $sanPham['so_luong'] ?></td>
+          </tr>
+          <tr>
+            <th>Danh mục</th>
+            <td><?= $sanPham['ten_danh_muc'] ?></td>
+          </tr>
+          <tr>
+            <th>Ngày nhập</th>
+            <td><?= date('d/m/Y', strtotime($sanPham['ngay_nhap'])) ?></td>
+          </tr>
+          <tr>
+  <th>Mô tả</th>
+  <td>
+    <div id="moTaShort">
+      <?= nl2br(substr($sanPham['mo_ta'], 0, 100)) ?>
+      <?php if (strlen($sanPham['mo_ta']) > 100): ?>
+        ... <a href="javascript:void(0);" onclick="showFullMoTa()">Xem thêm</a>
+      <?php endif; ?>
+    </div>
+    <div id="moTaFull" style="display: none;">
+      <?= nl2br($sanPham['mo_ta']) ?>
+      <br><a href="javascript:void(0);" onclick="hideFullMoTa()">Ẩn bớt</a>
+    </div>
+  </td>
+</tr>
 
-              </table>
-            </div>
+        </table>
+        <a href="<?= BASE_URL_ADMIN . '?act=san-pham' ?>" class="btn btn-secondary mt-3">Quay lại</a>
+      </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -94,6 +110,15 @@ include_once 'views/layout/footer.php';
       "responsive": true,
     });
   });
+    function showFullMoTa() {
+    document.getElementById('moTaShort').style.display = 'none';
+    document.getElementById('moTaFull').style.display = 'block';
+  }
+
+  function hideFullMoTa() {
+    document.getElementById('moTaFull').style.display = 'none';
+    document.getElementById('moTaShort').style.display = 'block';
+  }
 </script>
 </body>
 

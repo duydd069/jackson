@@ -19,7 +19,7 @@ include_once './views/layout/sidebar.php';
   <section class="content">
 
     <div class="container-fluid">
-      <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham'?>"> 
+      <a href="<?= BASE_URL_ADMIN . '?act=form-them-san-pham' ?>">
         <button class="btn btn-secondary">Thêm sản phẩm</button>
       </a>
       <hr>
@@ -35,6 +35,7 @@ include_once './views/layout/sidebar.php';
                   <tr>
                     <th>STT</th>
                     <th>Tên sản phẩm</th>
+                    <th>Hình ảnh</th>
                     <th>Giá sản phẩm</th>
                     <th>Giá khuyến mãi</th>
                     <th>Số lượng</th>
@@ -46,20 +47,22 @@ include_once './views/layout/sidebar.php';
                 <tbody>
                   <?php foreach ($listSanPham as $key => $sanPham): ?>
                     <tr>
-                      <td><?php echo $sanPham['id'] ?></td>
-                      <td><a href="<?php echo BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id=' . $sanPham['id'] ?>"><?php echo $sanPham['ten_san_pham'] ?></a></td>
+                      <td><?php echo $sanPham['san_pham_id']; ?></td>
+                      <td><Strong><a href="<?php echo BASE_URL_ADMIN . '?act=chi-tiet-san-pham&id=' . $sanPham['san_pham_id'] ?>"><?php echo $sanPham['ten_san_pham'] ?></a></Strong></td>
                       <td>
-                        <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" width="100px" alt=""
-                        onerror="this.onerror=null;this.src='https://www.studytienganh.vn/upload/2021/04/96746.png';">
+                        <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>"
+                          alt="<?= $sanPham['ten_san_pham'] ?>"
+                          style="width: 100px; height: 100px; object-fit: cover; border: 1px solid #ddd; border-radius: 4px;"
+                          onerror="this.onerror=null;this.src='https://www.studytienganh.vn/upload/2021/04/96746.png';">
                       </td>
                       <td><?php echo $sanPham['gia_san_pham'] ?></td>
                       <td><?php echo $sanPham['gia_khuyen_mai'] ?></td>
                       <td><?php echo $sanPham['so_luong'] ?></td>
                       <td><?php echo $sanPham['ten_danh_muc'] ?></td>
-                      <td><?php echo $sanPham['trang_thai']==1 ? 'Còn hàng' : 'Hết hàng' ?></td>
+                      <td><?php echo $sanPham['trang_thai'] == 1 ? 'Còn hàng' : 'Hết hàng' ?></td>
                       <td>
-                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-danh-muc&id=' . $danhMuc['id'] ?>"><button class="btn btn-primary">Sửa</button></a>
-                        <a href="<?= BASE_URL_ADMIN . '?act=xoa-danh-muc&id=' . $danhMuc['id'] ?>"><button onclick=" return confirm('Bồ có chắc muốn xóa danh mục này không ?')" class="btn btn-danger">Xóa</button></a>
+                        <a href="<?= BASE_URL_ADMIN . '?act=form-sua-san-pham&id=' . $sanPham['san_pham_id'] ?>"><button class="btn btn-primary">Sửa</button></a>
+                        <a href="<?= BASE_URL_ADMIN . '?act=xoa-san-pham&id=' . $sanPham['san_pham_id'] ?>"><button onclick=" return confirm('Bồ có chắc muốn xóa danh mục này không ?')" class="btn btn-danger">Xóa</button></a>
                       </td>
                     </tr>
                   <?php endforeach ?>

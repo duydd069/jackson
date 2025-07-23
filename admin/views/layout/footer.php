@@ -12,6 +12,20 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<script>
+function previewSelectedImage(input) {
+    const preview = document.getElementById('previewImage');
+    const file = input.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 
 <!-- jQuery -->
 <script src="assets/plugins/jquery/jquery.min.js"></script>
