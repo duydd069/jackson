@@ -68,7 +68,7 @@
               </p>
             </a>
           </li>
-                    <li class="nav-item">
+          <li class="nav-item">
             <a href="<?php echo BASE_URL_ADMIN . '?act=san-pham'; ?> " class="nav-link">
               <i class="nav-icon fas fa-mobile"></i>
               <p>
@@ -76,7 +76,7 @@
               </p>
             </a>
           </li>
-                    <li class="nav-item">
+          <li class="nav-item">
             <a href="<?php echo BASE_URL_ADMIN . '?act=nguoi-dung'; ?> " class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -84,11 +84,20 @@
               </p>
             </a>
           </li>
-                    <li class="nav-item">
+          <li class="nav-item">
             <a href="<?php echo BASE_URL_ADMIN . '?act=binh-luan'; ?> " class="nav-link">
               <i class="nav-icon fas fa-comment"></i>
               <p>
                 Bình luận
+
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL_ADMIN . '?act=don-hang'; ?> " class="nav-link">
+              <i class="nav-icon fas fa-shopping-bag"></i>
+              <p>
+                Đơn hàng
 
               </p>
             </a>
