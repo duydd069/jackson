@@ -42,6 +42,7 @@ match ($act) {
     // Đơn hàng
     'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->chiTietDonHang(),
+    'detail-don-hang' => (new AdminDonHangController())->detailDonHang(),
     'form-sua-don-hang' => (new AdminDonHangController())->formEditThemDonHang(),
     'sua-don-hang' => (new AdminDonHangController())->suaDonHang(),
     'xoa-don-hang' => (new AdminDonHangController())->deleteDonHang(),

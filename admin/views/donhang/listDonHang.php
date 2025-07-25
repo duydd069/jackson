@@ -51,6 +51,7 @@ include_once './views/layout/sidebar.php';
                                             <td><?php echo $donHang['tong_tien'] ?></td>
                                             <td><?php echo $donHang['ten_trang_thai'] ?></td>
                                             <td>
+                                                <a href="<?= BASE_URL_ADMIN . '?act=detail-don-hang&id=' . $donHang['id'] ?>"><button class="btn btn-info">Chi tiết</button></a>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=form-sua-don-hang&id=' . $donHang['id'] ?>"><button class="btn btn-primary">Sửa</button></a>
                                                 <a href="<?= BASE_URL_ADMIN . '?act=xoa-don-hang&id=' . $donHang['id'] ?>"><button onclick=" return confirm('Bồ có chắc muốn xóa danh mục này không ?')" class="btn btn-danger">Xóa</button></a>
                                             </td>

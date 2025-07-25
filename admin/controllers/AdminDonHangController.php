@@ -27,6 +27,14 @@ class AdminDonHangController
         require_once './views/donHang/detailDonHang.php';
     }
 
+    public function detailDonHang()
+    {
+        $don_hang_id = $_GET['id'];
+        $donHang = $this->modelDonHang->getDonHangById($don_hang_id);
+        $sanPhamDonHang = $this->modelDonHang->getListSpDonHang($don_hang_id);
+        require_once './views/donhang/chiTietDonHang.php';
+    }
+
     public function formEditThemDonHang()
     {
         $id = $_GET['id'];
@@ -70,6 +78,7 @@ class AdminDonHangController
         }
     }
 
+    
 
     public function deleteDonHang()
     {

@@ -29,12 +29,17 @@ class AdminDonHang
             $sql = "SELECT 
                     don_hangs.*,
                     trang_thai_don_hangs.ten_trang_thai,
-                    phuong_thuc_thanh_toans.ten_phuong_thuc
+                    phuong_thuc_thanh_toans.ten_phuong_thuc,
+                    tai_khoans.ho_ten,
+                    tai_khoans.email,
+                    tai_khoans.so_dien_thoai
                 FROM don_hangs
                 INNER JOIN trang_thai_don_hangs 
                     ON don_hangs.trang_thai_id = trang_thai_don_hangs.id
                 INNER JOIN phuong_thuc_thanh_toans 
                     ON don_hangs.phuong_thuc_thanh_toan_id = phuong_thuc_thanh_toans.id
+                INNER JOIN tai_khoans 
+                    ON don_hangs.tai_khoan_id = tai_khoans.id
                 WHERE don_hangs.id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
@@ -43,6 +48,20 @@ class AdminDonHang
             echo "Lỗi: " . $e->getMessage();
         }
     }
+
+    public function getListSpDonHang($don_hang_id)
+{
+    try {
+        $sql = "SELECT * FROM chi_tiet_don_hangs
+                WHERE don_hang_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':id' => $don_hang_id]);
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
+    }
+}
+
 
     public function getAllPhuongThucThanhToan()
     {
