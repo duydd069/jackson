@@ -88,11 +88,13 @@ include_once './views/layout/sidebar.php';
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <b>Invoice #007612</b><br>
-                  <br>
-                  <b>Order ID:</b> 4F3S8J<br>
-                  <b>Payment Due:</b> 2/22/2014<br>
-                  <b>Account:</b> 968-34567
+                    Thông tin
+                  <address>
+                    <strong>Mã đơn hàng<?= $donHang['ma_don_hang']?></strong><br>
+                    Phương thức thanh toán: <?= $donHang['ten_phuong_thuc'] ?><br>
+                    Số điện thoại : <?= $donHang['sdt_nguoi_nhan'] ?><br>
+                    Địa chỉ: <?= $donHang['dia_chi_nguoi_nhan'] ?><br>
+                  </address>
                 </div>
                 <!-- /.col -->
               </div>
