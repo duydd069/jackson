@@ -23,6 +23,10 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= BASE_URL_ADMIN . '?act=logout' ?>" role="button">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </a>
 
     </ul>
   </nav>

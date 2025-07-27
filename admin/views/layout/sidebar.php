@@ -77,14 +77,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo BASE_URL_ADMIN . '?act=nguoi-dung'; ?> " class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Người dùng
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?php echo BASE_URL_ADMIN . '?act=binh-luan'; ?> " class="nav-link">
               <i class="nav-icon fas fa-comment"></i>
               <p>
@@ -126,6 +118,8 @@
                 </a>
               </li>
             </ul>
+
+            
           </li>
 
         </ul>

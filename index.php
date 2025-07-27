@@ -6,10 +6,12 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
+require_once './controllers/AuthController.php';
 
 // Require toàn bộ file Models
-require_once './models/Student.php';
+require_once './models/AdminTaiKhoan.php';
 require_once './models/Sanpham.php';
+
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -27,5 +29,10 @@ match ($act) {
     '/' => (new HomeController())->home(), // Trang chủ
     'trangchu' => (new HomeController())->trangchu(), // Trang chủ
     'danhsachsanpham' => (new HomeController())->danhSachSanPham(), // Danh sách sản phẩm
+
+    //Login
+    'form-login' => (new AdminAuthController())->formLogin(), // Form đăng nhập
+    'login' => (new AdminAuthController())->login(), // Xử lý đăng nhập
+    'logout' => (new AdminAuthController())->logout(), // Xử lý đăng xuất
     
 };

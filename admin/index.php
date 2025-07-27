@@ -3,7 +3,8 @@
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
-
+checkAdminLogin();
+$admin = getCurrentUser();
 // Require toàn bộ file Controllers
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminDanhMucController.php';
@@ -38,6 +39,7 @@ match ($act) {
     'quan-ly-user' => (new AdminTaiKhoanController())->danhSachUser(),
     'xoa-quyen-admin' => (new AdminTaiKhoanController())->xoaQuyenAdmin(),
     'ban-user' => (new AdminTaiKhoanController())->toggleBanUser(),
+    'logout' => (new AdminTaiKhoanController())->logout(),
 
 
 

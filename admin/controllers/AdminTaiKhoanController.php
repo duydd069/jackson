@@ -43,4 +43,14 @@ class AdminTaiKhoanController
         header('Location: ' . BASE_URL_ADMIN . '?act=quan-ly-user');
         exit;
     }
+    public function logout()
+    {
+        // Xóa tất cả session
+        unset($_SESSION['admin']);
+        unset($_SESSION['user']);
+        unset($_SESSION['user_role']);
+        session_destroy();
+        header('Location: ' . BASE_URL);
+        exit;
+    }
 }
