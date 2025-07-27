@@ -35,14 +35,23 @@ include_once './views/layout/sidebar.php';
                     </div>
                     <div class="form-group">
                         <label>Tổng tiền</label>
-                        <input type="number" name="tong_tien" value="<?= $donHang['tong_tien'] ?>" class="form-control">
+                        <input type="number" name="tong_tien" value="<?= $donHang['tong_tien'] ?>" class="form-control" readonly>
                     </div>
+
                     <div class="form-group">
                         <label>Ghi chú</label>
                         <textarea name="ghi_chu" class="form-control"><?= $donHang['ghi_chu'] ?></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Phương thức thanh toán</label>
+                    <?php if ($donHang['trang_thai_id'] != 1): ?>
+                        <input type="hidden" name="phuong_thuc_thanh_toan_id" value="<?= $donHang['phuong_thuc_thanh_toan_id'] ?>">
+                        <select class="form-control" disabled>
+                            <?php foreach ($phuongThucThanhToanList as $pt): ?>
+                                <option <?= $pt['id'] == $donHang['phuong_thuc_thanh_toan_id'] ? 'selected' : '' ?>>
+                                    <?= $pt['ten_phuong_thuc'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
                         <select name="phuong_thuc_thanh_toan_id" class="form-control">
                             <?php foreach ($phuongThucThanhToanList as $pt): ?>
                                 <option value="<?= $pt['id'] ?>" <?= ($pt['id'] == $donHang['phuong_thuc_thanh_toan_id']) ? 'selected' : '' ?>>
@@ -50,17 +59,22 @@ include_once './views/layout/sidebar.php';
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
+                    <?php endif; ?>
+
+
                     <div class="form-group">
                         <label>Trạng thái đơn hàng</label>
                         <select name="trang_thai_id" class="form-control">
                             <?php foreach ($trangThaiDonHangList as $tt): ?>
-                                <option value="<?= $tt['id'] ?>" <?= ($tt['id'] == $donHang['trang_thai_id']) ? 'selected' : '' ?>>
-                                    <?= $tt['ten_trang_thai'] ?>
-                                </option>
+                                <?php if ($tt['id'] >= $donHang['trang_thai_id']): ?>
+                                    <option value="<?= $tt['id'] ?>" <?= ($tt['id'] == $donHang['trang_thai_id']) ? 'selected' : '' ?>>
+                                        <?= $tt['ten_trang_thai'] ?>
+                                    </option>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
                     </div>
+
                 </div>
 
                 <div class="card-footer">

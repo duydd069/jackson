@@ -53,10 +53,10 @@
             </ul>
           </li> -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?php echo BASE_URL_ADMIN . '?act=/'; ?> " class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Thống kê
               </p>
             </a>
           </li>
@@ -101,6 +101,31 @@
 
               </p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Quản lý tài khoản
+              </p>
+              <i class="fas fa-angle-left right"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL_ADMIN . '?act=quan-ly-admin'; ?>" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  Quản lý admin
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo BASE_URL_ADMIN . '?act=quan-ly-user'; ?>" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  Quản lý người dùng
+                </a>
+              </li>
+            </ul>
           </li>
 
         </ul>

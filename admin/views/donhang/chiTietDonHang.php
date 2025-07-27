@@ -9,8 +9,24 @@ include_once './views/layout/sidebar.php';
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12">
+                <div class="col-sm-10">
                     <h1>Quản lý danh sách - Đơn hàng : <?= $donHang['ma_don_hang'] ?></h1>
+                </div>
+                <div class="col-sm-2">
+                  <form action="" method="post">
+                    <select name="" id="" class="form-group">
+                      <?php foreach ($listTrangThaiDonHang as $key=> $trangThai): ?>
+                        <option 
+                        <?= $trangThai['id'] == $donHang['trang_thai_id'] ? 'selected' : '' ?> 
+                        <?= $trangThai['id'] < $donHang['trang_thai_id'] ? 'disabled' : '' ?> 
+                        value="<?= $trangThai['id'] ?>" 
+                        <?= $donHang['trang_thai_id'] == $trangThai['id'] ? 'selected' : '' ?>>
+                            <?= $trangThai['ten_trang_thai'] ?>
+                        </option>
+                      <?php endforeach ?>
+
+                    </select>
+                  </form>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -106,42 +122,25 @@ include_once './views/layout/sidebar.php';
                   <table class="table table-striped">
                     <thead>
                     <tr>
-                      <th>Qty</th>
-                      <th>Product</th>
-                      <th>Serial #</th>
-                      <th>Description</th>
-                      <th>Subtotal</th>
+                      <td>#</td>
+                      <td>Tên sản phẩm</td>
+                      <td>Đơn giá</td>
+                      <td>Số lượng</td>
+                      <td>Thành tiền</td>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        foreach ($sanPhamDonHang as $key => $sanPham): ?>
                     <tr>
-                      <td>1</td>
-                      <td>Call of Duty</td>
-                      <td>455-981-221</td>
-                      <td>El snort testosterone trophy driving gloves handsome</td>
-                      <td>$64.50</td>
+                      <td><?= $key + 1 ?></td>
+                      <td><?= $sanPham['ten_san_pham'] ?></td>
+                      <td><?= number_format($sanPham['don_gia']) ?> đ</td>
+                      <td><?= $sanPham['so_luong'] ?></td>
+                      <td><?= number_format($sanPham['don_gia'] * $sanPham['so_luong']) ?> đ</td>
                     </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Need for Speed IV</td>
-                      <td>247-925-726</td>
-                      <td>Wes Anderson umami biodiesel</td>
-                      <td>$50.00</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Monsters DVD</td>
-                      <td>735-845-642</td>
-                      <td>Terry Richardson helvetica tousled street art master</td>
-                      <td>$10.70</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Grown Ups Blue Ray</td>
-                      <td>422-568-642</td>
-                      <td>Tousled lomo letterpress</td>
-                      <td>$25.99</td>
-                    </tr>
+                    <?php endforeach; ?>
+                    
                     </tbody>
                   </table>
                 </div>
@@ -151,40 +150,17 @@ include_once './views/layout/sidebar.php';
 
               <div class="row">
                 <!-- accepted payments column -->
-                <div class="col-6">
-                  <p class="lead">Payment Methods:</p>
-                  <img src="../../dist/img/credit/visa.png" alt="Visa">
-                  <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                  <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                  <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
-                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                  </p>
-                </div>
                 <!-- /.col -->
                 <div class="col-6">
-                  <p class="lead">Amount Due 2/22/2014</p>
+                  <p class="lead">Ngày đặt <?= $donHang['ngay_dat'] ?></p>
 
                   <div class="table-responsive">
                     <table class="table">
+
                       <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
-                      </tr>
-                      <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
-                      </tr>
-                      <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
-                      </tr>
-                      <tr>
-                        <th>Total:</th>
-                        <td>$265.24</td>
+                        <th>Tổng tiền</th>
+                        <td><?= number_format($donHang['tong_tien'] ) ?> đ</td>
                       </tr>
                     </table>
                   </div>
@@ -193,18 +169,7 @@ include_once './views/layout/sidebar.php';
               </div>
               <!-- /.row -->
 
-              <!-- this row will not appear when printing -->
-              <div class="row no-print">
-                <div class="col-12">
-                  <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                    Payment
-                  </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Generate PDF
-                  </button>
-                </div>
-              </div>
+
             </div>
             <!-- /.invoice -->
           </div><!-- /.col -->

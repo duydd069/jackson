@@ -18,7 +18,7 @@ class AdminDonHangController
 
     public function chiTietDonHang()
     {
-        $id = $_GET['id'] ?? 0;
+        $id = $_GET['id'];
         $donHang = $this->modelDonHang->getDonHangById($id);
         if (!$donHang) {
             header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
@@ -32,6 +32,7 @@ class AdminDonHangController
         $don_hang_id = $_GET['id'];
         $donHang = $this->modelDonHang->getDonHangById($don_hang_id);
         $sanPhamDonHang = $this->modelDonHang->getListSpDonHang($don_hang_id);
+        $listTrangThaiDonHang = $this->modelDonHang->getAllTrangThaiDonHang();
         require_once './views/donhang/chiTietDonHang.php';
     }
 
@@ -48,35 +49,42 @@ class AdminDonHangController
         require_once './views/donhang/formEditDonHang.php';
     }
 
-    public function suaDonHang()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = $_POST['id'];
-            $ten_nguoi_nhan = $_POST['ten_nguoi_nhan'];
-            $email_nguoi_nhan = $_POST['email_nguoi_nhan'];
-            $sdt_nguoi_nhan = $_POST['sdt_nguoi_nhan'];
-            $dia_chi_nguoi_nhan = $_POST['dia_chi_nguoi_nhan'];
-            $tong_tien = $_POST['tong_tien'];
-            $ghi_chu = $_POST['ghi_chu'];
-            $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
-            $trang_thai_id = $_POST['trang_thai_id'];
+    public function suaDonHang() {
+    $id = $_POST['id'];
+    $donHang = $this->modelDonHang->getDonHangById($id);
 
-            $this->modelDonHang->updateDonHang(
-                $id,
-                $ten_nguoi_nhan,
-                $email_nguoi_nhan,
-                $sdt_nguoi_nhan,
-                $dia_chi_nguoi_nhan,
-                $tong_tien,
-                $ghi_chu,
-                $phuong_thuc_thanh_toan_id,
-                $trang_thai_id
-            );
+    // Không cho thay đổi tổng tiền (giữ nguyên từ DB)
+    $tong_tien = $donHang['tong_tien'];
 
-            header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
-            exit();
-        }
+    // Không cho đổi phương thức nếu trạng thái khác 1
+    if ($donHang['trang_thai_id'] != 1) {
+        $phuong_thuc_thanh_toan_id = $donHang['phuong_thuc_thanh_toan_id'];
+    } else {
+        $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
     }
+
+    // Không cho chọn trạng thái lùi về quá khứ
+    $trang_thai_id = $_POST['trang_thai_id'];
+    if ($trang_thai_id < $donHang['trang_thai_id']) {
+        $trang_thai_id = $donHang['trang_thai_id'];
+    }
+
+    // Gọi update
+    $this->modelDonHang->updateDonHang(
+        $id,
+        $_POST['ten_nguoi_nhan'],
+        $_POST['email_nguoi_nhan'],
+        $_POST['sdt_nguoi_nhan'],
+        $_POST['dia_chi_nguoi_nhan'],
+        $tong_tien,
+        $_POST['ghi_chu'],
+        $phuong_thuc_thanh_toan_id,
+        $trang_thai_id
+    );
+
+    header('Location: ' . BASE_URL_ADMIN . '?act=don-hang');
+}
+
 
     
 
