@@ -78,16 +78,47 @@ class AdminDanhMucController
         }
     }
     public function deleteDanhMuc()
-    {
-        $id = $_GET['id'];
-        $danhMuc= $this->modelDanhMuc->getDetailDanhMuc($id);
-
-        if ($danhMuc) {
-            $this->modelDanhMuc->destroyDanhMuc($id);
-            // Redirect to danh sách danh mục
-            header('Location: ' . BASE_URL_ADMIN . '?act=danh-muc');
-            exit();
-        }
+{
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        header('Location: ' . BASE_URL_ADMIN . '?act=danh-muc');
+        exit();
     }
+
+    $danhMuc = $this->modelDanhMuc->getDetailDanhMuc($id);
+    if (!$danhMuc) {
+        header('Location: ' . BASE_URL_ADMIN . '?act=danh-muc');
+        exit();
+    }
+
+    // Kiểm tra xem có sản phẩm nào thuộc danh mục này không
+    $soSanPham = $this->modelDanhMuc->countSanPhamByDanhMuc($id);
+
+    if ($soSanPham > 0 && !isset($_GET['force'])) {
+        // Hiển thị thông báo xác nhận xóa
+        echo "
+            <script>
+                if (confirm('Danh mục vẫn còn {$soSanPham} sản phẩm. Bạn có chắc muốn xóa và chuyển các sản phẩm sang “Không có danh mục”?')) {
+                    window.location.href = '" . BASE_URL_ADMIN . "?act=xoa-danh-muc&id={$id}&force=1';
+                } else {
+                    window.location.href = '" . BASE_URL_ADMIN . "?act=danh-muc';
+                }
+            </script>
+        ";
+        exit();
+    }
+
+    // Nếu force = 1 thì cập nhật sản phẩm về danh_muc_id = 0
+    if ($soSanPham > 0) {
+        $this->modelDanhMuc->chuyenSanPhamVeKhongDanhMuc($id);
+    }
+
+    // Xóa danh mục
+    $this->modelDanhMuc->destroyDanhMuc($id);
+
+    header('Location: ' . BASE_URL_ADMIN . '?act=danh-muc');
+    exit();
+}
+
 
 }

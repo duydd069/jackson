@@ -58,6 +58,34 @@ class AdminDanhMuc {
             echo "Lỗi: " . $e->getMessage();
         }
     }
+
+    public function countSanPhamByDanhMuc($id){
+        try{
+            $sql = "SELECT COUNT(*) as total FROM san_phams WHERE danh_muc_id = :id";
+            $stmt = $this ->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id,
+            ]);
+            $result = $stmt->fetch();
+            return $result['total'];
+        }
+        catch (Exception $e)   {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function chuyenSanPhamVeKhongDanhMuc($id){
+        try{
+            $sql = "UPDATE san_phams SET danh_muc_id = 0 WHERE danh_muc_id = :id";
+            $stmt = $this ->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id,
+            ]);
+            return true;
+
+        } catch(Exception $e){
+            echo "Lỗi : " .$e->getMessage();
+        }
+    }
     public function destroyDanhMuc($id) {
         try {
             $sql = "DELETE FROM danh_mucs WHERE id = :id";

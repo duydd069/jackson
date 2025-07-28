@@ -77,15 +77,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo BASE_URL_ADMIN . '?act=binh-luan'; ?> " class="nav-link">
-              <i class="nav-icon fas fa-comment"></i>
-              <p>
-                Bình luận
-
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?php echo BASE_URL_ADMIN . '?act=don-hang'; ?> " class="nav-link">
               <i class="nav-icon fas fa-shopping-bag"></i>
               <p>

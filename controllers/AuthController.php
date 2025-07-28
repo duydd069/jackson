@@ -52,7 +52,7 @@ class AdminAuthController
         unset($_SESSION['user']);
         unset($_SESSION['user_role']);
         session_destroy();
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . '?act=form-login');
         exit;
     }
 }
