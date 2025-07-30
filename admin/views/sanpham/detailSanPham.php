@@ -36,6 +36,7 @@ include_once './views/layout/sidebar.php';
             <th>Tên sản phẩm</th>
             <td><?= $sanPham['ten_san_pham'] ?></td>
           </tr>
+          
           <tr>
             <th>Giá sản phẩm</th>
             <td><?= number_format($sanPham['gia_san_pham']) ?> đ</td>

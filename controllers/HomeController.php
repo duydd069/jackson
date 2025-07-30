@@ -13,7 +13,7 @@ class HomeController
 
     public function home()
     {
-        echo "Welcome to the Home Page!";
+        require_once './views/trangChu.php';
     }
     public function trangchu()
     {
