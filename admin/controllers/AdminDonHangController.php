@@ -53,23 +53,17 @@ class AdminDonHangController
     $id = $_POST['id'];
     $donHang = $this->modelDonHang->getDonHangById($id);
 
-    // Không cho thay đổi tổng tiền (giữ nguyên từ DB)
     $tong_tien = $donHang['tong_tien'];
-
-    // Không cho đổi phương thức nếu trạng thái khác 1
     if ($donHang['trang_thai_id'] != 1) {
         $phuong_thuc_thanh_toan_id = $donHang['phuong_thuc_thanh_toan_id'];
     } else {
         $phuong_thuc_thanh_toan_id = $_POST['phuong_thuc_thanh_toan_id'];
     }
 
-    // Không cho chọn trạng thái lùi về quá khứ
     $trang_thai_id = $_POST['trang_thai_id'];
     if ($trang_thai_id < $donHang['trang_thai_id']) {
         $trang_thai_id = $donHang['trang_thai_id'];
     }
-
-    // Gọi update
     $this->modelDonHang->updateDonHang(
         $id,
         $_POST['ten_nguoi_nhan'],

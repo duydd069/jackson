@@ -33,6 +33,12 @@ include_once './views/layout/sidebar.php';
             <td><?= $sanPham['id'] ?></td>
           </tr>
           <tr>
+            <th>Ảnh sản phẩm</th>
+            <td>
+                <img src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" style="width: 100px">
+            </td>
+          </tr>
+          <tr>
             <th>Tên sản phẩm</th>
             <td><?= $sanPham['ten_san_pham'] ?></td>
           </tr>
