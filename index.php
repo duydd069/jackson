@@ -53,4 +53,8 @@ match ($act) {
     'cap-nhat-so-luong' => (new GioHangController())->capNhatSoLuong(),
     'xoa-san-pham-gio' => (new GioHangController())->xoaSanPham(),
 
+    // Thanh toán
+    'xac-nhan-thong-tin' => (new ThanhToanController())->thanhToan(),
+    'dat-hang'            => (new ThanhToanController())->datHang(),     // submit POST để lưu đơn
+    'xem-don-hang'        => (new ThanhToanController())->xemDonHang(),
 };

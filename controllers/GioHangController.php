@@ -108,5 +108,6 @@ class GioHangController
         exit;
     }
 
-    public function luuDonHang() {}
+    
+
 }

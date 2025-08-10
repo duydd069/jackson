@@ -90,7 +90,7 @@ include_once './views/layout/menu.php';
                             </div>
                             <div class="cart-calculate-items">
                                 <form action="<?= BASE_URL ?>?act=xac-nhan-thong-tin" method="POST">
-                                    <button type="submit" class="btn btn-sqr d-block mt-3">Xác nhận thông tin</button>
+                                    <button type="submit" class="btn btn-sqr d-block mt-3">Thanh toán</button>
                                 </form>
                             </div>
 

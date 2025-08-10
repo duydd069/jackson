@@ -87,7 +87,71 @@ class GioHangModel {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':gh_id' => $gioHang['id']]);
     }
+
+    
 }
+public function getThongTinKhachHang($taiKhoanId)
+    {
+        $sql = "SELECT id, ho_ten, email, so_dien_thoai, dia_chi
+                FROM tai_khoans
+                WHERE id = :id
+                LIMIT 1";
+        $stm = $this->conn->prepare($sql);
+        $stm->execute([':id' => $taiKhoanId]);
+        return $stm->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy cart items của user + tên sp + đơn giá (ưu tiên giá_khuyến_mãi nếu có)
+    public function getCartItemsByUserId($taiKhoanId)
+    {
+        $sql = "
+            SELECT
+                sp.id            AS san_pham_id,
+                sp.ten_san_pham  AS ten_san_pham,
+                COALESCE(sp.gia_khuyen_mai, sp.gia_san_pham) AS don_gia,
+                ctgh.so_luong    AS so_luong,
+                (ctgh.so_luong * COALESCE(sp.gia_khuyen_mai, sp.gia_san_pham)) AS thanh_tien
+            FROM gio_hangs gh
+            JOIN chi_tiet_gio_hangs ctgh ON gh.id = ctgh.gio_hang_id
+            JOIN san_phams sp            ON sp.id = ctgh.san_pham_id
+            WHERE gh.tai_khoan_id = :uid
+            ORDER BY ctgh.id DESC
+        ";
+        $stm = $this->conn->prepare($sql);
+        $stm->execute([':uid' => $taiKhoanId]);
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+// Lấy id giỏ hàng theo tài khoản
+public function getGioHangIdByUser(int $taiKhoanId): ?int
+{
+    $sql = "SELECT id FROM gio_hangs WHERE tai_khoan_id = :uid LIMIT 1";
+    $stm = $this->conn->prepare($sql);
+    $stm->execute([':uid' => $taiKhoanId]);
+    $row = $stm->fetch(PDO::FETCH_ASSOC);
+    return $row ? (int)$row['id'] : null;
+}
+
+// Xoá sạch các dòng trong giỏ hàng của user
+public function clearCartByUser(int $taiKhoanId): bool
+{
+    $this->conn->beginTransaction();
+    try {
+        $gioHangId = $this->getGioHangIdByUser($taiKhoanId);
+        if ($gioHangId) {
+            $delCt = $this->conn->prepare(
+                "DELETE FROM chi_tiet_gio_hangs WHERE gio_hang_id = :gid"
+            );
+            $delCt->execute([':gid' => $gioHangId]);
+        }
+        $this->conn->commit();
+        return true;
+    } catch (Throwable $e) {
+        $this->conn->rollBack();
+        throw $e;
+    }
+}
+
+
 }
 
 ?>
