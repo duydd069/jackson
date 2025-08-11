@@ -43,9 +43,6 @@ require_once 'views/layout/menu.php';
                                         <a href="#account-info" class="active" data-bs-toggle="tab">
                                             <i class="fa fa-user"></i> Chi tiết tài khoản
                                         </a>
-                                        <a href="#address-edit" data-bs-toggle="tab">
-                                            <i class="fa fa-map-marker"></i> Địa chỉ
-                                        </a>
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -54,20 +51,7 @@ require_once 'views/layout/menu.php';
                                 <div class="col-lg-9 col-md-8">
                                     <div class="tab-content" id="myaccountContent">
                                         <!-- Địa chỉ (KHÔNG active mặc định) -->
-                                        <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                            <div class="myaccount-content">
-                                                <h5>Địa chỉ</h5>
-                                                <address>
-                                                    <p><strong><?= htmlspecialchars($user['ho_ten'] ?? '') ?></strong></p>
-                                                    <p><?= nl2br(htmlspecialchars($user['dia_chi'] ?? '')) ?></p>
-                                                    <p>Mobile: <?= htmlspecialchars($user['so_dien_thoai'] ?? '') ?></p>
-                                                    <p>Email: <?= htmlspecialchars($user['email'] ?? '') ?></p>
-                                                </address>
-                                                <a href="#account-info" data-bs-toggle="tab" class="btn btn-sqr">
-                                                    <i class="fa fa-edit"></i> Sửa thông tin / địa chỉ
-                                                </a>
-                                            </div>
-                                        </div>
+                                        
 
                                         <!-- Thông tin tài khoản (PHẢI active mặc định) -->
                                         <div class="tab-pane fade show active" id="account-info" role="tabpanel">

@@ -121,12 +121,7 @@ include_once './views/layout/menu.php';
                                     </div>
 
                                     <div class="summary-footer-area mt-3">
-                                        <div class="custom-control custom-checkbox mb-20">
-                                            <input type="checkbox" class="custom-control-input" id="terms" required />
-                                            <label class="custom-control-label" for="terms">Tôi đồng ý với điều khoản.</label>
-                                        </div>
 
-                                        <!-- Nếu muốn gửi total lên server (không bắt buộc) -->
                                         <input type="hidden" name="tong_tien" value="<?= (float)$grandTotal ?>">
 
                                         <button type="submit" class="btn btn-sqr">Thanh toán</button>
