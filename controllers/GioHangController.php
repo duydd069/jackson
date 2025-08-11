@@ -58,24 +58,26 @@ class GioHangController
 
 
     public function themVaoGioHang()
-    {
-        if (!isset($_SESSION['user'])) {
-            header("Location: " . BASE_URL . "?act=form-login");
-            exit;
-        }
-
-        $sanPhamId = $_GET['id'] ?? null;
-        $soLuong = $_POST['so_luong'] ?? 1;
-        $taiKhoanId = $_SESSION['user']['id'];
-
-        if ($sanPhamId) {
-            $gioHang = $this->gioHangModel->getOrCreateGioHang($taiKhoanId);
-            $this->gioHangModel->themSanPham($gioHang['id'], $sanPhamId, $soLuong);
-        }
-
-        header("Location: " . BASE_URL . "?act=gio-hang");
+{
+    if (!isset($_SESSION['user'])) {
+        header("Location: " . BASE_URL . "?act=form-login");
         exit;
     }
+
+    // LẤY ID TỪ POST thay vì GET
+    $sanPhamId  = $_POST['id'] ?? $_GET['id'] ?? null;
+    $soLuong    = isset($_POST['so_luong']) ? (int)$_POST['so_luong'] : 1;
+    $taiKhoanId = (int)$_SESSION['user']['id'];
+
+    if ($sanPhamId) {
+        $gioHang = $this->gioHangModel->getOrCreateGioHang($taiKhoanId);
+        $this->gioHangModel->themSanPham((int)$gioHang['id'], (int)$sanPhamId, (int)$soLuong);
+    }
+
+    header("Location: " . BASE_URL . "?act=gio-hang");
+    exit;
+}
+
 
     public function capNhatSoLuong()
     {

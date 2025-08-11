@@ -55,6 +55,12 @@ match ($act) {
 
     // Thanh toán
     'xac-nhan-thong-tin' => (new ThanhToanController())->thanhToan(),
-    'dat-hang'            => (new ThanhToanController())->datHang(),     // submit POST để lưu đơn
+    'dat-hang'            => (new ThanhToanController())->datHang(),
     'xem-don-hang'        => (new ThanhToanController())->xemDonHang(),
+    'don-hang-cua-toi' => (new ThanhToanController())->donHangCuaToi(),
+
+    //Tài khoản
+    'tai-khoan' => (new AdminAuthController())->taiKhoan(),
+    'cap-nhat-thong-tin' => (new AdminAuthController())->capNhatThongTin(),
+
 };

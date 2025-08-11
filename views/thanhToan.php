@@ -115,11 +115,9 @@ include_once './views/layout/menu.php';
                                         </div>
                                     <?php endforeach; ?>
 
-                                    <!-- Khung QR: chỉ hiện khi chọn PTTT id=2 -->
                                     <div id="qrContainer" class="text-center mt-3" style="display:none;">
                                         <p>Quét mã để thanh toán:</p>
                                         <img src="assets/img/qr.jpg" alt="QR thanh toán" style="max-width:260px;">
-                                        <!-- Anh thay ảnh QR thật tại assets/img/qr_demo.png -->
                                     </div>
 
                                     <div class="summary-footer-area mt-3">

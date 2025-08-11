@@ -68,6 +68,7 @@
                                                 <?php if (isset($_SESSION['user']) || isset($_SESSION['admin'])): ?>
                                                     <li><strong>👋 Xin chào, <?= $_SESSION['user']['ho_ten'] ?? $_SESSION['admin']['ho_ten'] ?></strong></li>
                                                     <li><a href="<?= BASE_URL ?>?act=tai-khoan">Tài khoản</a></li>
+                                                    <li><a href="<?= BASE_URL ?>?act=don-hang-cua-toi">Đơn hàng của tôi</a></li>
                                                     <li><a href="<?= BASE_URL ?>?act=logout">Đăng xuất</a></li>
                                                 <?php else: ?>
                                                     <li><a href="<?= BASE_URL ?>?act=form-login">Đăng nhập</a></li>
@@ -81,6 +82,7 @@
                                                 <i class="pe-7s-shopbag"></i>
                                             </a>
                                         </li>
+                                        
                                     </ul>
                                 </div>
 

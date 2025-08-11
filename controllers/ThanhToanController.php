@@ -31,7 +31,6 @@ class ThanhToanController
         require './views/thanhToan.php';
     }
 
-    // Submit thanh toán -> lưu DB -> chuyển trang chi tiết
     public function datHang()
     {
         if (!isset($_SESSION['user'])) {
@@ -41,7 +40,6 @@ class ThanhToanController
         $cartItems = $this->gioHangModel->getCartItemsByUserId($uid);
 
         if (empty($cartItems)) {
-            // không có hàng => quay lại giỏ
             header("Location: " . BASE_URL . "?act=cart"); exit;
         }
 
@@ -53,13 +51,11 @@ class ThanhToanController
         $ghichu= trim($_POST['ghi_chu'] ?? '');
         $pttt  = (int)($_POST['paymentmethod'] ?? 1);
 
-        // Tính lại tổng từ server
         $subTotal = 0.0;
         foreach ($cartItems as $it) $subTotal += (float)$it['thanh_tien'];
         $shipping   = $this->thanhToanModel->tinhPhiVanChuyen($subTotal);
         $grandTotal = $subTotal + $shipping;
 
-        // Lưu đơn
         $donHangId = $this->thanhToanModel->taoDonHang([
             'tai_khoan_id'               => $uid,
             'ten_nguoi_nhan'             => $ten,
@@ -71,10 +67,8 @@ class ThanhToanController
             'grand_total'                => $grandTotal,
         ], $cartItems);
 
-        // Xoá giỏ
         $this->gioHangModel->clearCartByUser($uid);
 
-        // Chuyển tới trang chi tiết đơn
         header("Location: " . BASE_URL . "?act=xem-don-hang&id=" . $donHangId);
         exit;
     }
@@ -90,7 +84,6 @@ class ThanhToanController
 
         $items = $this->thanhToanModel->getChiTietDonHang($id);
 
-        // Ngày giao dự kiến = ngày đặt + 5 ngày (cố định)
         $ngayDat = new DateTime($don['ngay_dat']);
         $ngayGiaoDuKien = clone $ngayDat;
         $ngayGiaoDuKien->modify('+5 days');
@@ -98,7 +91,6 @@ class ThanhToanController
         require './views/donHangChiTiet.php';
     }
 
-    // (option) anh giữ hàm này nếu muốn tái sử dụng
     public function layThongTinKhachHang(){
         if (!isset($_SESSION['user'])) {
             header("Location: " . BASE_URL . "?act=form-login"); exit;
@@ -106,4 +98,16 @@ class ThanhToanController
         $taiKhoanId = (int)$_SESSION['user']['id'];
         return $this->gioHangModel->getThongTinKhachHang($taiKhoanId);
     }
+
+public function donHangCuaToi()
+{
+    if (!isset($_SESSION['user'])) {
+        header("Location: " . BASE_URL . "?act=form-login"); exit;
+    }
+    $uid    = (int)$_SESSION['user']['id'];
+    $orders = $this->thanhToanModel->getDonHangsByUser($uid);
+
+    require './views/donHangDanhSach.php';
+}
+
 }

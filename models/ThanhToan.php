@@ -98,4 +98,34 @@ class ThanhToanModel
         $stm->execute([':id' => $donHangId]);
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getDonHangGanNhatByUser(int $uid): ?array
+{
+    $sql = "SELECT dh.*,
+                   pttt.ten_phuong_thuc,
+                   ttdh.ten_trang_thai
+            FROM don_hangs dh
+            LEFT JOIN phuong_thuc_thanh_toans pttt ON pttt.id = dh.phuong_thuc_thanh_toan_id
+            LEFT JOIN trang_thai_don_hangs ttdh    ON ttdh.id = dh.trang_thai_id
+            WHERE dh.tai_khoan_id = :uid
+            ORDER BY dh.id DESC
+            LIMIT 1";
+    $stm = $this->conn->prepare($sql);
+    $stm->execute([':uid' => $uid]);
+    $row = $stm->fetch(PDO::FETCH_ASSOC);
+    return $row ?: null;
+}
+public function getDonHangsByUser(int $uid): array
+{
+    $sql = "SELECT dh.id, dh.ma_don_hang, dh.ngay_dat, dh.tong_tien,
+                   pttt.ten_phuong_thuc, ttdh.ten_trang_thai
+            FROM don_hangs dh
+            LEFT JOIN phuong_thuc_thanh_toans pttt ON pttt.id = dh.phuong_thuc_thanh_toan_id
+            LEFT JOIN trang_thai_don_hangs ttdh    ON ttdh.id = dh.trang_thai_id
+            WHERE dh.tai_khoan_id = :uid
+            ORDER BY dh.id DESC";
+    $stm = $this->conn->prepare($sql);
+    $stm->execute([':uid' => $uid]);
+    return $stm->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

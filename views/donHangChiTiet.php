@@ -12,7 +12,7 @@ include_once './views/layout/menu.php';
                     <h5>Thông tin đơn</h5>
                     <p><strong>Trạng thái:</strong> <?= htmlspecialchars($don['ten_trang_thai'] ?? 'N/A') ?></p>
                     <p><strong>Ngày đặt:</strong> <?= htmlspecialchars($don['ngay_dat']) ?></p>
-                    <p><strong>Dự kiến giao:</strong> <?= $ngayGiaoDuKien->format('Y-m-d') ?> (cố định +5 ngày)</p>
+                    <p><strong>Dự kiến giao:</strong> <?= $ngayGiaoDuKien->format('Y-m-d') ?></p>
                     <p><strong>Phương thức thanh toán:</strong> <?= htmlspecialchars($don['ten_phuong_thuc'] ?? 'N/A') ?></p>
                 </div>
 
