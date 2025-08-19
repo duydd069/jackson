@@ -15,7 +15,6 @@ include_once './views/layout/menu.php';
                     <p><strong>Dự kiến giao:</strong> <?= $ngayGiaoDuKien->format('Y-m-d') ?></p>
                     <p><strong>Phương thức thanh toán:</strong> <?= htmlspecialchars($don['ten_phuong_thuc'] ?? 'N/A') ?></p>
                 </div>
-
                 <div class="card p-3">
                     <h5>Sản phẩm</h5>
                     <div class="table-responsive">

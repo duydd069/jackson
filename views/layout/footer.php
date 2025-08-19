@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="widget-body">
-                            <p>Chúng tôi là một đội ngũ thiết kế và phát triển tạo ra những sản phẩm WordPress, Shopify, Opencart chất lượng cao.</p>
+                            <p>Cửa hàng bán điện thoại xách tay uy tín</p>
                         </div>
                     </div>
                 </div>
@@ -67,11 +67,7 @@
             <div class="row align-items-center mt-20">
                 <div class="col-md-6">
                     <div class="newsletter-wrapper">
-                        <h6 class="widget-title-text">Đăng ký nhận bản tin</h6>
-                        <form class="newsletter-inner" id="mc-form">
-                            <input type="email" class="news-field" id="mc-email" autocomplete="off" placeholder="Nhập địa chỉ email của bạn">
-                            <button class="news-btn" id="mc-submit">Đăng ký</button>
-                        </form>
+                        
                         <!-- mail-chimp-alerts Start -->
                         <div class="mailchimp-alerts">
                             <div class="mailchimp-submitting"></div><!-- mail-chimp-submitting end -->

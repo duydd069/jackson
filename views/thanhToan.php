@@ -121,7 +121,12 @@ include_once './views/layout/menu.php';
                                     </div>
 
                                     <div class="summary-footer-area mt-3">
+                                        <div class="custom-control custom-checkbox mb-20">
+                                            <input type="checkbox" class="custom-control-input" id="terms" required />
+                                            <label class="custom-control-label" for="terms">Tôi đồng ý với điều khoản.</label>
+                                        </div>
 
+                                        <!-- Nếu muốn gửi total lên server (không bắt buộc) -->
                                         <input type="hidden" name="tong_tien" value="<?= (float)$grandTotal ?>">
 
                                         <button type="submit" class="btn btn-sqr">Thanh toán</button>
@@ -153,4 +158,31 @@ document.querySelectorAll('input[name="paymentmethod"]').forEach(function(r){
         document.getElementById('qrContainer').style.display = (parseInt(checked.value) === 2) ? 'block' : 'none';
     }
 })();
+// Hiện/ẩn QR khi chọn phương thức có id = 2
+document.querySelectorAll('input[name="paymentmethod"]').forEach(function(r){
+    r.addEventListener('change', function(){
+        var showQR = (parseInt(this.value) === 2);
+        document.getElementById('qrContainer').style.display = showQR ? 'block' : 'none';
+    });
+});
+
+// Khởi tạo theo radio đang checked
+(function(){
+    var checked = document.querySelector('input[name="paymentmethod"]:checked');
+    if (checked) {
+        document.getElementById('qrContainer').style.display = (parseInt(checked.value) === 2) ? 'block' : 'none';
+    }
+})();
+
+// ===== Điều kiện: Đơn > 2 triệu bắt buộc chuyển khoản =====
+document.getElementById('formThanhToan').addEventListener('submit', function(e) {
+    var grandTotal = <?= (float)$grandTotal ?>; // total từ PHP
+    var selectedPM = document.querySelector('input[name="paymentmethod"]:checked');
+
+    // Giả sử id = 1 là COD, id = 2 là Chuyển khoản
+    if (grandTotal > 70000000 && parseInt(selectedPM.value) === 1) {
+        e.preventDefault();
+        alert("Đơn hàng trên 70 triệu, vui lòng thanh toán trước.");
+    }
+});
 </script>

@@ -58,9 +58,13 @@ match ($act) {
     'dat-hang'            => (new ThanhToanController())->datHang(),
     'xem-don-hang'        => (new ThanhToanController())->xemDonHang(),
     'don-hang-cua-toi' => (new ThanhToanController())->donHangCuaToi(),
+    'huy-don-hang'       => (new ThanhToanController())->huyDonHang(),
+
 
     //Tài khoản
     'tai-khoan' => (new AdminAuthController())->taiKhoan(),
     'cap-nhat-thong-tin' => (new AdminAuthController())->capNhatThongTin(),
+
+    
 
 };

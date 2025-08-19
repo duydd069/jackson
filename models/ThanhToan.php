@@ -114,18 +114,30 @@ class ThanhToanModel
     $row = $stm->fetch(PDO::FETCH_ASSOC);
     return $row ?: null;
 }
-public function getDonHangsByUser(int $uid): array
-{
-    $sql = "SELECT dh.id, dh.ma_don_hang, dh.ngay_dat, dh.tong_tien,
-                   pttt.ten_phuong_thuc, ttdh.ten_trang_thai
-            FROM don_hangs dh
-            LEFT JOIN phuong_thuc_thanh_toans pttt ON pttt.id = dh.phuong_thuc_thanh_toan_id
-            LEFT JOIN trang_thai_don_hangs ttdh    ON ttdh.id = dh.trang_thai_id
-            WHERE dh.tai_khoan_id = :uid
-            ORDER BY dh.id DESC";
-    $stm = $this->conn->prepare($sql);
-    $stm->execute([':uid' => $uid]);
-    return $stm->fetchAll(PDO::FETCH_ASSOC);
-}
 
+public function huyDonHang(int $donHangId, int $uid): bool
+    {
+        $sql = "UPDATE don_hangs
+                SET trang_thai_id = 8
+                WHERE id = :id AND tai_khoan_id = :uid AND trang_thai_id = 1";
+        $stm = $this->conn->prepare($sql);
+        $stm->execute([':id' => $donHangId, ':uid' => $uid]);
+        return $stm->rowCount() > 0;
+    }
+
+    // SỬA: thêm dh.trang_thai_id để view biết khi nào hiển thị nút Hủy
+    public function getDonHangsByUser(int $uid): array
+    {
+        $sql = "SELECT dh.id, dh.ma_don_hang, dh.ngay_dat, dh.tong_tien,
+                       dh.trang_thai_id,
+                       pttt.ten_phuong_thuc, ttdh.ten_trang_thai
+                FROM don_hangs dh
+                LEFT JOIN phuong_thuc_thanh_toans pttt ON pttt.id = dh.phuong_thuc_thanh_toan_id
+                LEFT JOIN trang_thai_don_hangs ttdh    ON ttdh.id = dh.trang_thai_id
+                WHERE dh.tai_khoan_id = :uid
+                ORDER BY dh.id DESC";
+        $stm = $this->conn->prepare($sql);
+        $stm->execute([':uid' => $uid]);
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

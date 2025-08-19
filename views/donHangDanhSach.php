@@ -6,6 +6,13 @@ include_once './views/layout/menu.php';
   <div class="container">
     <h3 class="mb-3">Đơn hàng của tôi</h3>
 
+    <?php if (isset($_SESSION['flash'])): ?>
+      <div class="alert alert-<?= htmlspecialchars($_SESSION['flash']['type']) ?>">
+        <?= htmlspecialchars($_SESSION['flash']['msg']) ?>
+      </div>
+      <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
+
     <?php if (empty($orders)): ?>
       <div class="alert alert-info">Bạn chưa có đơn hàng nào.</div>
     <?php else: ?>
@@ -19,6 +26,7 @@ include_once './views/layout/menu.php';
               <th>PT thanh toán</th>
               <th>Tổng tiền</th>
               <th>Xem</th>
+              <th>Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +42,16 @@ include_once './views/layout/menu.php';
                      href="<?= BASE_URL . '?act=xem-don-hang&id=' . (int)$dh['id'] ?>">
                      Chi tiết
                   </a>
+                </td>
+                <td>
+                  <?php if ((int)$dh['trang_thai_id'] === 1): ?>
+                    <form method="POST" action="<?= BASE_URL . '?act=huy-don-hang' ?>" onsubmit="return confirm('Hủy đơn này?');" class="d-inline">
+                      <input type="hidden" name="don_hang_id" value="<?= (int)$dh['id'] ?>">
+                      <button type="submit" class="btn btn-sm btn-outline-danger">Hủy đơn</button>
+                    </form>
+                  <?php else: ?>
+                    <button class="btn btn-sm btn-outline-secondary" disabled>Hủy</button>
+                  <?php endif; ?>
                 </td>
               </tr>
             <?php endforeach; ?>

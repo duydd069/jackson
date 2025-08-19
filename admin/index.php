@@ -29,7 +29,6 @@ match ($act) {
 
     // Route báo cáo thống kê - Trang chủ
 
-    '/' => (new AdminBaoCaoThongKeController())->home(),
 
     // List tài khoản quản trị
     // Quản lý tài khoản

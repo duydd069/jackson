@@ -52,14 +52,7 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
-            <a href="<?php echo BASE_URL_ADMIN . '?act=/'; ?> " class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Thống kê
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="<?php echo BASE_URL_ADMIN . '?act=danh-muc'; ?> " class="nav-link">
               <i class="nav-icon fas fa-th"></i>

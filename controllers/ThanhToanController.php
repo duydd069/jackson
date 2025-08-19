@@ -109,5 +109,29 @@ public function donHangCuaToi()
 
     require './views/donHangDanhSach.php';
 }
+public function huyDonHang()
+    {
+        if (!isset($_SESSION['user'])) {
+            header("Location: " . BASE_URL . "?act=form-login"); exit;
+        }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header("Location: " . BASE_URL . "?act=don-hang-cua-toi"); exit;
+        }
 
+        $uid = (int)$_SESSION['user']['id'];
+        $donHangId = (int)($_POST['don_hang_id'] ?? 0);
+
+        try {
+            $ok = $this->thanhToanModel->huyDonHang($donHangId, $uid);
+            if ($ok) {
+                $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Đã hủy đơn thành công.'];
+            } else {
+                $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Không thể hủy: chỉ hủy được khi đơn đang Chờ xác nhận.'];
+            }
+        } catch (Throwable $e) {
+            $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Có lỗi xảy ra khi hủy đơn.'];
+        }
+
+        header("Location: " . BASE_URL . "?act=don-hang-cua-toi"); exit;
+    }
 }

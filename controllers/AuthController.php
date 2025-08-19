@@ -31,7 +31,7 @@ class AdminAuthController
                 // Admin - vào trang admin
                 $_SESSION['admin'] = $taiKhoan;
                 $_SESSION['user_role'] = 'admin';
-                header('Location: ' . BASE_URL_ADMIN);
+                header('Location: ' . BASE_URL_ADMIN . '?act=danh-muc');
             } else {
                 // User thường - vào trang chủ
                 $_SESSION['user'] = $taiKhoan;
