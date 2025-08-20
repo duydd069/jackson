@@ -66,8 +66,14 @@ include_once './views/layout/menu.php';
                                         <div class="alert alert-danger mt-3">
                                             <?= $_SESSION['cart_error_msg'] ?>
                                         </div>
-                                        <?php unset($_SESSION['cart_error_msg']);
-                                        ?>
+                                        <?php unset($_SESSION['cart_error_msg']); ?>
+                                    <?php endif; ?>
+                                    
+                                    <?php if (isset($_SESSION['cart_success'])): ?>
+                                        <div class="alert alert-success mt-3">
+                                            <?= $_SESSION['cart_success'] ?>
+                                        </div>
+                                        <?php unset($_SESSION['cart_success']); ?>
                                     <?php endif; ?>
                                 </tbody>
                             </table>

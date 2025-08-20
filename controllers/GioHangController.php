@@ -74,6 +74,9 @@ class GioHangController
         $this->gioHangModel->themSanPham((int)$gioHang['id'], (int)$sanPhamId, (int)$soLuong);
     }
 
+    // Thêm thông báo thành công
+    $_SESSION['cart_success'] = 'Đã thêm sản phẩm vào giỏ hàng!';
+    
     header("Location: " . BASE_URL . "?act=gio-hang");
     exit;
 }

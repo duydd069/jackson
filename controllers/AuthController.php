@@ -12,6 +12,7 @@ class AdminAuthController
 
     public function formLogin()
     {
+        $listCategory = $this->modelTaiKhoan->getAllCategories();
         require_once './views/login.php';
     }
 
@@ -48,6 +49,7 @@ class AdminAuthController
 
     public function formRegister()
     {
+        $listCategory = $this->modelTaiKhoan->getAllCategories();
         require_once './views/register.php';
     }
 

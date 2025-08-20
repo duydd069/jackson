@@ -55,9 +55,10 @@
                             <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
                                 <div class="header-search-container">
                                     <button class="search-trigger d-xl-none d-lg-block"><i class="pe-7s-search"></i></button>
-                                    <form class="header-search-box d-lg-none d-xl-block">
-                                        <input type="text" placeholder="Tìm kiếm sản phẩm" class="header-search-field">
-                                        <button class="header-search-btn"><i class="pe-7s-search"></i></button>
+                                    <form class="header-search-box d-lg-none d-xl-block" method="GET" action="<?= BASE_URL ?>">
+                                        <input type="hidden" name="act" value="tim-kiem">
+                                        <input type="text" name="q" placeholder="Tìm kiếm sản phẩm" class="header-search-field" value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+                                        <button type="submit" class="header-search-btn"><i class="pe-7s-search"></i></button>
                                     </form>
                                 </div>
                                 <div class="header-configure-area">

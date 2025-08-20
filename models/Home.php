@@ -58,4 +58,64 @@ class Home {
         return false;
     }
     }
+    
+    public function getProductsByCategory($danhMucId) {
+        try {
+            $sql = "SELECT 
+                        sp.id as san_pham_id,
+                        sp.ten_san_pham,
+                        sp.gia_san_pham,
+                        sp.gia_khuyen_mai,
+                        sp.so_luong,
+                        sp.ngay_nhap,
+                        sp.danh_muc_id,
+                        sp.trang_thai,
+                        sp.mo_ta,
+                        sp.hinh_anh,
+                        dm.id as danh_muc_id_full,
+                        dm.ten_danh_muc
+                    FROM san_phams sp
+                    INNER JOIN danh_mucs dm ON sp.danh_muc_id = dm.id
+                    WHERE sp.trang_thai = 1 AND sp.danh_muc_id = :danh_muc_id
+                    ORDER BY CAST(sp.id AS UNSIGNED) DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':danh_muc_id' => $danhMucId]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return [];
+        }
+    }
+    
+    public function searchProducts($keyword) {
+        try {
+            $sql = "SELECT 
+                        sp.id as san_pham_id,
+                        sp.ten_san_pham,
+                        sp.gia_san_pham,
+                        sp.gia_khuyen_mai,
+                        sp.so_luong,
+                        sp.ngay_nhap,
+                        sp.danh_muc_id,
+                        sp.trang_thai,
+                        sp.mo_ta,
+                        sp.hinh_anh,
+                        dm.id as danh_muc_id_full,
+                        dm.ten_danh_muc
+                    FROM san_phams sp
+                    INNER JOIN danh_mucs dm ON sp.danh_muc_id = dm.id
+                    WHERE sp.trang_thai = 1 
+                    AND (sp.ten_san_pham LIKE :keyword 
+                         OR sp.mo_ta LIKE :keyword 
+                         OR dm.ten_danh_muc LIKE :keyword)
+                    ORDER BY CAST(sp.id AS UNSIGNED) DESC";
+            $stmt = $this->conn->prepare($sql);
+            $keyword = '%' . $keyword . '%';
+            $stmt->execute([':keyword' => $keyword]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            return [];
+        }
+    }
 }

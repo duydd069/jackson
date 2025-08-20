@@ -38,6 +38,8 @@ match ($act) {
     // Trang chủ
     '/' => (new HomeController())->home(), // Trang chủ
     'san-pham' => (new HomeController())->danhSachSanPham(), // Danh sách sản phẩm
+    'danh-muc-san-pham' => (new HomeController())->sanPhamTheoDanhMuc(), // Sản phẩm theo danh mục
+    'tim-kiem' => (new HomeController())->timKiem(), // Tìm kiếm sản phẩm
     'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(), // Chi tiết sản phẩm
 
     //Login

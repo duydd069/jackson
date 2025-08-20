@@ -45,4 +45,44 @@ class HomeController
         require_once './views/thanhToan.php';
     }
     
+    public function sanPhamTheoDanhMuc()
+    {
+        $id = $_GET['id'] ?? 0;
+        $listCategory = $this->modelHome->getAllCategories();
+        
+        // Lấy thông tin danh mục hiện tại
+        $danhMucHienTai = null;
+        foreach ($listCategory as $category) {
+            if ($category['id'] == $id) {
+                $danhMucHienTai = $category;
+                break;
+            }
+        }
+        
+        if (!$danhMucHienTai) {
+            header('Location: ' . BASE_URL . '?act=san-pham');
+            exit();
+        }
+        
+        // Lấy sản phẩm theo danh mục
+        $listProduct = $this->modelHome->getProductsByCategory($id);
+        
+        require_once './views/sanPhamTheoDanhMuc.php';
+    }
+    
+    public function timKiem()
+    {
+        $keyword = $_GET['q'] ?? '';
+        $listCategory = $this->modelHome->getAllCategories();
+        
+        if (empty($keyword)) {
+            header('Location: ' . BASE_URL . '?act=san-pham');
+            exit();
+        }
+        
+        // Lấy sản phẩm theo từ khóa tìm kiếm
+        $listProduct = $this->modelHome->searchProducts($keyword);
+        
+        require_once './views/timKiem.php';
+    }
 }

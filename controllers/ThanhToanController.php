@@ -3,12 +3,13 @@ class ThanhToanController
 {
     public $thanhToanModel;
     public $gioHangModel;
+    public $modelHome;
 
     public function __construct()
     {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        $this->gioHangModel   = new GioHangModel();
         $this->thanhToanModel = new ThanhToanModel();
+        $this->gioHangModel = new GioHangModel();
+        $this->modelHome = new Home();
     }
 
     // Trang form tổng thanh toán
@@ -27,6 +28,7 @@ class ThanhToanController
         $grandTotal = $subTotal + $shipping;
 
         $paymentMethods = $this->thanhToanModel->getPhuongThucThanhToan();
+        $listCategory = $this->modelHome->getAllCategories();
 
         require './views/thanhToan.php';
     }
@@ -83,6 +85,7 @@ class ThanhToanController
         if (!$don) { header("Location: " . BASE_URL); exit; }
 
         $items = $this->thanhToanModel->getChiTietDonHang($id);
+        $listCategory = $this->modelHome->getAllCategories();
 
         $ngayDat = new DateTime($don['ngay_dat']);
         $ngayGiaoDuKien = clone $ngayDat;
@@ -106,6 +109,7 @@ public function donHangCuaToi()
     }
     $uid    = (int)$_SESSION['user']['id'];
     $orders = $this->thanhToanModel->getDonHangsByUser($uid);
+    $listCategory = $this->modelHome->getAllCategories();
 
     require './views/donHangDanhSach.php';
 }

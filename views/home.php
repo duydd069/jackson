@@ -89,6 +89,23 @@ require_once 'views/layout/menu.php';
         <!-- service policy area start -->
         <div class="service-policy section-padding">
             <div class="container">
+                <!-- Thông báo -->
+                <?php if (isset($_SESSION['cart_error_msg'])): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['cart_error_msg'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <?php unset($_SESSION['cart_error_msg']); ?>
+                <?php endif; ?>
+                
+                <?php if (isset($_SESSION['cart_success'])): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['cart_success'] ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <?php unset($_SESSION['cart_success']); ?>
+                <?php endif; ?>
+                
                 <div class="row mtn-30">
                     <div class="col-sm-6 col-lg-3">
                         <div class="policy-item">
@@ -152,6 +169,9 @@ require_once 'views/layout/menu.php';
         <!-- featured product area start -->
         <section class="feature-product section-padding">
             <div class="container">
+                <!-- Form tìm kiếm -->
+
+                
                 <div class="row">
                     <div class="col-12">
                         <!-- section title start -->

@@ -30,6 +30,7 @@ include_once './views/layout/sidebar.php';
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>STT</th>
                                         <th>Mã đơn hàng</th>
                                         <th>Tên người nhận</th>
@@ -43,6 +44,7 @@ include_once './views/layout/sidebar.php';
                                 <tbody>
                                     <?php foreach ($listDonHang as $key => $donHang): ?>
                                         <tr>
+                                            <td><?php echo $donHang['id']; ?></td>
                                             <td><?php echo $donHang['ma_don_hang']; ?></td>
                                             <td><Strong><a href="<?php echo BASE_URL_ADMIN . '?act=chi-tiet-don-hang&id=' . $donHang['id'] ?>"><?php echo $donHang['ma_don_hang'] ?></a></Strong></td>
                                             <td><?php echo $donHang['ten_nguoi_nhan'] ?></td>
@@ -83,7 +85,12 @@ include_once 'views/layout/footer.php';
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "order": [[0, "desc"]], // Sắp xếp theo cột ID (cột đầu tiên) giảm dần
+            "pageLength": 25, // Hiển thị 25 dòng mỗi trang
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+            }
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({
             "paging": true,

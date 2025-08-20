@@ -18,11 +18,15 @@ class AdminDonHang
                 INNER JOIN trang_thai_don_hangs ttdh 
                     ON dh.trang_thai_id = ttdh.id
                 ORDER BY dh.id DESC";
+        
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
     } catch (Exception $e) {
         echo "Lỗi: " . $e->getMessage();
+        return [];
     }
 }
 
